@@ -15,18 +15,18 @@ ul li{
   list-style: none;
 }
 
-#complete{
+.complete{
   border: 1px solid rgb(255, 85, 114);
   border-radius: 5px;
   padding: 5px;
   margin-right: 10px;
 }
-#complete:hover {
+.complete:hover {
   background-color: rgb(216, 216, 216);
   cursor: pointer;
 }
 
-#newTodo {
+#newTodo, #filter {
   width: 100%;
 }
 
@@ -49,7 +49,7 @@ ul li{
   padding-bottom: 10px;
 }
 
-#filter{
+#delete{
   color: rgb(90, 90, 90);
   border: 1px solid grey;
   display: block;
@@ -59,7 +59,7 @@ ul li{
   text-decoration: none;
 }
 
-#filter:hover{
+#delete:hover{
   background-color: rgb(195, 195, 195);
 }
 
@@ -71,6 +71,11 @@ ul li{
 .lineThrough {
   text-decoration: line-through;
   color: red;
+}
+
+.invisable{
+visibility: hidden;
+display: none;
 }
 
 .checkBox{

@@ -1,39 +1,35 @@
 <div id="componentBackground">
   <div id="smallWrapper">
-    <h1>Todo list</h1>
-
-
-
+    <h1>TODO list</h1>
     <p>A place to store the things you have to do!</p>
-   <p>In total, there are <b>{{todos.length}}</b> items to do. </p>
-    <a href="javascript:void(0)" (click)="filterCompleted()" id="filter">Filter Out your completed todos</a> <!-- goes to the archive handler in Angular-->
+    <p>In total, there are <b>{{todos.length}}</b> items to do. </p>
+    <input placeholder="filter" id="filter" [(ngModel)]="filterText" (input)="filterTodos()" /> <!-- STOLEN FROM THE FAMILY MEMBER PROJECT-->
+
+
+
     {{remain()}}
 
-    <ul>
-      <li *ngFor = "let t of todos;let i = index" class="todoItem"  > <!--  repeats for EACH todo items. the word "index" is a special keyword, that is being saved into the variable "i" this will be used for the delete function.-->
-        {{i+1}} <!-- this outputs the number of the list item-->
+    <ol>
+      <li *ngFor = "let t of filteredTodos;let i = index" class="todoItem"  > <!--  repeats for EACH todo items. the word "index" is a special keyword, that is being saved into the variable "i" this will be used for the delete function.-->
 
-        <label id="complete" >
+        <!-- "ngDefaultControl" below removes an error "No value accessor for form control with unspecified, but introduces an error where completed tasks say "on" -->
+        <label class="complete"  [class.invisable]="t.done"  >
           Complete
-          <input type="checkbox" [(ngModel)] = "t.done" >
+          <input type="checkbox" [(ngModel)] = "t.done" > <!-- " [(ngModel)] " is for data binding. Passes data from the .html to the .ts file... "t.done" refers to the checkbox-->
+        </label>
 
-        </label> <!-- " [(ngModel)] " is for data binding. Passes data from the .html to the .ts file... "t.done" refers to the checkbox-->
-
-        <input type="text"  [(ngModel)] = "t.name" [class.lineThrough]="t.done"> <!-- the lineThrough class is triggered whenever one of the tasks is marked as-->
-        <span class (click)="del(i)">X </span> <!-- click handler runs the delete function. it deletes the index, (i)-->
+        <input type="text"  [(ngModel)] = "t.name" [class.lineThrough]="t.done"> <!-- the lineThrough class is triggered whenever one of the tasks is checked as 'done'-->
+        <span (click)="del(i)">X </span> <!-- click handler runs the delete function. it deletes the index, (i)-->
       </li>
-    </ul>
+    </ol>
     <hr>
     <form action = "" (submit)= add()> <!-- the "add" function is put onto the form's submit button-->
-    <input type="text" name="newTodo" id="newTodo" placeholder="Add Your Todo" [(ngModel)]="newTodo">
-    <br>
-    <button id="addButton">
-      add
-      <!-- <i class="fa fa-plus"></i> -->
-    </button>
-
-
-
+      <input type="text" name="newTodo" id="newTodo" placeholder="Add Your Todo" [(ngModel)]="newTodo">
+      <br>
+      <button id="addButton">
+        add
+        <!-- <i class="fa fa-plus"></i> -->
+      </button>
     </form>
   </div> <!--close small wrapper div-->
 </div> <!--close background div-->
